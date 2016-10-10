@@ -1,0 +1,741 @@
+Public Class GoodsConsignment
+
+    Private Sub Vehile_InsuranceList()
+        Dim Str_Today, Str_NextWeek As String
+        Dim NextWeek As Date
+        Dim j As Integer
+
+        Str_Today = Date.Now.ToString("MM/dd/yyyy")
+
+        NextWeek = Date.Now.AddDays(7)
+        Str_NextWeek = NextWeek.ToString("MM/dd/yyyy")
+
+
+
+
+        Dim Ds As New DataSet
+        Lst_Insurance.Items.Clear()
+        con.Open()
+        Try
+            Cmd = con.CreateCommand
+            Cmd.CommandText = "select VehicleNo from vehicle where Insurance between #" & Trim(Str_Today) & "# and #" & Trim(Str_NextWeek) & "# order by VehicleNo Asc"
+            Adp.SelectCommand = Cmd
+            Adp.Fill(Ds, "vehicle")
+
+            j = Ds.Tables("vehicle").Rows.Count
+            For j = 0 To j - 1
+                Lst_Insurance.Items.Add(Ds.Tables("vehicle").Rows(j).Item("VehicleNo"))
+            Next j
+        Catch ex As Exception
+            MsgBox("Error: " & ex.Source & ": " & ex.Message, MsgBoxStyle.OkOnly, "Connection Error !!")
+        End Try
+        con.Close()
+
+        Dim Ds1 As New DataSet
+        Lst_Fc.Items.Clear()
+        con.Open()
+        Try
+            Cmd1 = con.CreateCommand
+            Cmd1.CommandText = "select VehicleNo from vehicle where Fc between #" & Trim(Str_Today) & "# and #" & Trim(Str_NextWeek) & "# order by VehicleNo Asc"
+            Adp.SelectCommand = Cmd1
+            Adp.Fill(Ds1, "vehicle")
+
+            j = Ds1.Tables("vehicle").Rows.Count
+            For j = 0 To j - 1
+                Lst_Fc.Items.Add(Ds1.Tables("vehicle").Rows(j).Item("VehicleNo"))
+            Next j
+        Catch ex As Exception
+            MsgBox("Error: " & ex.Source & ": " & ex.Message, MsgBoxStyle.OkOnly, "Connection Error !!")
+        End Try
+        con.Close()
+
+        Dim Ds2 As New DataSet
+        Lst_PP.Items.Clear()
+        con.Open()
+        Try
+            Cmd2 = con.CreateCommand
+            Cmd2.CommandText = "select VehicleNo from vehicle where Pp between #" & Trim(Str_Today) & "# and #" & Trim(Str_NextWeek) & "# order by VehicleNo Asc"
+            Adp.SelectCommand = Cmd2
+            Adp.Fill(Ds2, "vehicle")
+
+            j = Ds2.Tables("vehicle").Rows.Count
+            For j = 0 To j - 1
+                Lst_PP.Items.Add(Ds2.Tables("vehicle").Rows(j).Item("VehicleNo"))
+            Next j
+        Catch ex As Exception
+            MsgBox("Error: " & ex.Source & ": " & ex.Message, MsgBoxStyle.OkOnly, "Connection Error !!")
+        End Try
+        con.Close()
+
+        Dim Ds3 As New DataSet
+        Lst_Np.Items.Clear()
+        con.Open()
+        Try
+            Cmd3 = con.CreateCommand
+            Cmd3.CommandText = "select VehicleNo from vehicle where Np between #" & Trim(Str_Today) & "# and #" & Trim(Str_NextWeek) & "# order by VehicleNo Asc"
+            Adp.SelectCommand = Cmd3
+            Adp.Fill(Ds3, "vehicle")
+
+            j = Ds3.Tables("vehicle").Rows.Count
+            For j = 0 To j - 1
+                Lst_Np.Items.Add(Ds3.Tables("vehicle").Rows(j).Item("VehicleNo"))
+            Next j
+        Catch ex As Exception
+            MsgBox("Error: " & ex.Source & ": " & ex.Message, MsgBoxStyle.OkOnly, "Connection Error !!")
+        End Try
+        con.Close()
+
+        Dim Ds4 As New DataSet
+        Lst_Tp.Items.Clear()
+        con.Open()
+        Try
+            Cmd4 = con.CreateCommand
+            Cmd4.CommandText = "select VehicleNo from vehicle where Tp between #" & Trim(Str_Today) & "# and #" & Trim(Str_NextWeek) & "# order by VehicleNo Asc"
+            Adp.SelectCommand = Cmd4
+            Adp.Fill(Ds4, "vehicle")
+
+            j = Ds4.Tables("vehicle").Rows.Count
+            For j = 0 To j - 1
+                Lst_Tp.Items.Add(Ds4.Tables("vehicle").Rows(j).Item("VehicleNo"))
+            Next j
+        Catch ex As Exception
+            MsgBox("Error: " & ex.Source & ": " & ex.Message, MsgBoxStyle.OkOnly, "Connection Error !!")
+        End Try
+        con.Close()
+
+    End Sub
+
+
+    Private Sub VehicleList()
+        Dim Ds As New DataSet
+        Drp_VehicleNo.Items.Clear()
+        con.Open()
+        Try
+            Cmd = con.CreateCommand
+            Cmd.CommandText = "select VehicleNo from Vehicle order by VehicleNo Asc"
+            Adp.SelectCommand = Cmd
+            Adp.Fill(Ds, "Vehicle")
+            Dim j As Integer
+            j = Ds.Tables("Vehicle").Rows.Count
+            For j = 0 To j - 1
+                Drp_VehicleNo.Items.Add(Ds.Tables("Vehicle").Rows(j).Item("VehicleNo"))
+            Next j
+        Catch ex As Exception
+            MsgBox("Error: " & ex.Source & ": " & ex.Message, MsgBoxStyle.OkOnly, "Connection Error !!")
+        End Try
+        con.Close()
+    End Sub
+
+
+    Private Sub PetrolBunkList()
+        Dim Ds, Ds1 As New DataSet
+        Dim Dt As New DataTable
+
+        Drp_PetrolBunkId.Items.Clear()
+        con.Open()
+        Try
+            Cmd = con.CreateCommand
+            Cmd.CommandText = "select PetrolBunkId from PetrolBunk order by PetrolBunkId Asc"
+            Adp.SelectCommand = Cmd
+            Adp.Fill(Ds, "PetrolBunk")
+            Dim j As Integer
+            j = Ds.Tables("PetrolBunk").Rows.Count
+            For j = 0 To j - 1
+                Drp_PetrolBunkId.Items.Add(Ds.Tables("PetrolBunk").Rows(j).Item("PetrolBunkId"))
+            Next j
+        Catch ex As Exception
+            MsgBox("Error: " & ex.Source & ": " & ex.Message, MsgBoxStyle.OkOnly, "Connection Error !!")
+        End Try
+        con.Close()
+
+        con.Open()
+        Cmd1 = con.CreateCommand
+        Cmd1.CommandText = "select PetrolBunkId from PetrolBunk where SetDefault='True'"
+        Adp1.SelectCommand = Cmd1
+        Adp1.Fill(Ds1)
+        Dt = Ds1.Tables("PetrolBunk")
+        If (Ds1.Tables(0).Rows.Count > 0) Then
+            Drp_PetrolBunkId.Text = Ds1.Tables(0).Rows(0)("PetrolBunkId")
+            con.Close()
+        Else
+            con.Close()
+        End If
+
+    End Sub
+
+
+    Private Sub DriverList()
+        Dim Ds As New DataSet
+        Drp_DriverName.Items.Clear()
+        con.Open()
+        Try
+            Cmd = con.CreateCommand
+            Cmd.CommandText = "select EmployeeId from Employee order by EmployeeId Asc"
+            Adp.SelectCommand = Cmd
+            Adp.Fill(Ds, "Employee")
+            Dim j As Integer
+            j = Ds.Tables("Employee").Rows.Count
+            For j = 0 To j - 1
+                Drp_DriverName.Items.Add(Ds.Tables("Employee").Rows(j).Item("EmployeeId"))
+            Next j
+        Catch ex As Exception
+            MsgBox("Error: " & ex.Source & ": " & ex.Message, MsgBoxStyle.OkOnly, "Connection Error !!")
+        End Try
+        con.Close()
+    End Sub
+
+
+    Private Sub CompanyList()
+        Dim Ds As New DataSet
+        Drp_CompanyFrom.Items.Clear()
+        Drp_CompanyTo.Items.Clear()
+        con.Open()
+        Try
+            Cmd = con.CreateCommand
+            Cmd.CommandText = "select CompanyName from Company order by CompanyName asc"
+            Adp.SelectCommand = Cmd
+            Adp.Fill(Ds, "Company")
+            Dim j As Integer
+            j = Ds.Tables("Company").Rows.Count
+            For j = 0 To j - 1
+                Drp_CompanyFrom.Items.Add(Ds.Tables("Company").Rows(j).Item("CompanyName"))
+                Drp_CompanyTo.Items.Add(Ds.Tables("Company").Rows(j).Item("CompanyName"))
+            Next j
+        Catch ex As Exception
+            MsgBox("Error: " & ex.Source & ": " & ex.Message, MsgBoxStyle.OkOnly, "Connection Error !!")
+        End Try
+        con.Close()
+    End Sub
+
+    Private Sub PlaceList()
+        Dim Ds As New DataSet
+        Drp_PlaceBooking.Items.Clear()
+        Drp_PlaceFrom.Items.Clear()
+        Drp_PlaceTo.Items.Clear()
+        con.Open()
+        Try
+            Cmd = con.CreateCommand
+            Cmd.CommandText = "select PlaceName from Place order by PlaceName asc"
+            Adp.SelectCommand = Cmd
+            Adp.Fill(Ds, "Place")
+            Dim j As Integer
+            j = Ds.Tables("Place").Rows.Count
+            For j = 0 To j - 1
+                Drp_PlaceBooking.Items.Add(Ds.Tables("Place").Rows(j).Item("PlaceName"))
+                Drp_PlaceFrom.Items.Add(Ds.Tables("Place").Rows(j).Item("PlaceName"))
+                Drp_PlaceTo.Items.Add(Ds.Tables("Place").Rows(j).Item("PlaceName"))
+            Next j
+        Catch ex As Exception
+            MsgBox("Error: " & ex.Source & ": " & ex.Message, MsgBoxStyle.OkOnly, "Connection Error !!")
+        End Try
+        con.Close()
+    End Sub
+
+    Private Sub EntryNoList()
+        Dim Ds3 As New DataSet
+        Drp_EntryNo.Items.Clear()
+        con.Open()
+        Try
+            Cmd = con.CreateCommand
+            Cmd.CommandText = "select EntryNo from GoodsConsignment order by EntryNo asc"
+            Adp.SelectCommand = Cmd
+            Adp.Fill(Ds3, "GoodsConsignment")
+            Dim j As Integer
+            j = Ds3.Tables("GoodsConsignment").Rows.Count
+            For j = 0 To j - 1
+                Drp_EntryNo.Items.Add(Ds3.Tables("GoodsConsignment").Rows(j).Item("EntryNo"))
+            Next j
+        Catch ex As Exception
+            MsgBox("Error: " & ex.Source & ": " & ex.Message, MsgBoxStyle.OkOnly, "Connection Error !!")
+        End Try
+        con.Close()
+    End Sub
+
+
+    Private Sub MaxNo()
+
+        Dim ds As New DataSet
+        Dim ds1 As New DataSet
+        Dim dt As New DataTable
+
+        con.Open()
+        Try
+
+            Cmd1 = con.CreateCommand
+            Cmd1.CommandText = "Select * from GoodsConsignment"
+            Adp1.SelectCommand = Cmd1
+            Adp1.Fill(ds1, "GoodsConsignment")
+            If ds1.Tables(0).Rows.Count > 0 Then
+                Cmd = con.CreateCommand
+                Cmd.CommandText = "Select max(EntryNo) as EntryNo from GoodsConsignment"
+                Adp.SelectCommand = Cmd
+                Adp.Fill(ds)
+                dt = ds.Tables("GoodsConsignment")
+                If ds.Tables(0).Rows.Count > 0 Then
+                    LnkEntryNo.Text = Val(ds.Tables(0).Rows(0).Item("EntryNo")) + 1
+                End If
+            Else
+                LnkEntryNo.Text = "1001"
+            End If
+
+            con.Close()
+        Catch ex As Exception
+            con.Close()
+            MsgBox("Error:" & ex.Source & ":" & ex.Message, MsgBoxStyle.Critical, "Connection Error!!")
+        End Try
+    End Sub
+
+    Private Sub MaxLedgerNo()
+
+        Dim ds As New DataSet
+        Dim ds1 As New DataSet
+        Dim dt As New DataTable
+
+        con.Open()
+        Try
+
+            Cmd1 = con.CreateCommand
+            Cmd1.CommandText = "Select * from Ledger"
+            Adp1.SelectCommand = Cmd1
+            Adp1.Fill(ds1, "Ledger")
+            If ds1.Tables(0).Rows.Count > 0 Then
+                Cmd = con.CreateCommand
+                Cmd.CommandText = "Select max(LedgerNo) as LedgerNo from Ledger"
+                Adp.SelectCommand = Cmd
+                Adp.Fill(ds)
+                dt = ds.Tables("Ledger")
+                If ds.Tables(0).Rows.Count > 0 Then
+                    Lbl_LedgerNo.Text = Val(ds.Tables(0).Rows(0).Item("LedgerNo")) + 1
+                End If
+            Else
+                Lbl_LedgerNo.Text = "1001"
+            End If
+
+            con.Close()
+        Catch ex As Exception
+            con.Close()
+            MsgBox("Error:" & ex.Source & ":" & ex.Message, MsgBoxStyle.Critical, "Connection Error!!")
+        End Try
+    End Sub
+
+    Private Sub TotalCalculation()
+        Txt_TotExpence.Text = Val(Txt_TolGate.Text) + Val(Txt_Loading.Text) + Val(Txt_UnLoading.Text) + Val(Txt_OtherExpence.Text)
+        Txt_Balance.Text = Val(Val(Txt_Wage.Text) - Val(Txt_Advance.Text)) + Val(Txt_TotExpence.Text)
+    End Sub
+
+    Private Sub GridDieselEntryList()
+        Dim DtEntry As String
+        Dim a() As String
+        DtEntry = Dt_Entry.Text
+        a = Dtentry.Split("/")
+        DtEntry = a(1) & "/" & a(0) & "/" & a(2)
+
+        Dim Ds As New DataSet
+        con.Open()
+        Try
+            Cmd = con.CreateCommand
+            Cmd.CommandText = "select * from GoodsConsignment where EntryDate=#" & Trim(DtEntry) & "# order by EntryNo Asc"
+            Adp.SelectCommand = Cmd
+            Adp.Fill(Ds, "GoodsConsignment")
+            DG_GoodConsignment.DataSource = Ds
+            DG_GoodConsignment.DataMember = "GoodsConsignment"
+            DG_GoodConsignment.ReadOnly = True
+            con.Close()
+        Catch ex As Exception
+            con.Close()
+            MsgBox("Error: " & ex.Source & ": " & ex.Message, MsgBoxStyle.OkOnly, "Connection Error !!")
+        End Try
+    End Sub
+
+
+
+    Private Sub Ref()
+        Txt_Freight.Text = "0"
+        Txt_Wage.Text = "0"
+        Txt_Advance.Text = "0"
+        Txt_Diesel.Text = "0"
+        Txt_Loading.Text = "0"
+        Txt_UnLoading.Text = "0"
+        Txt_TolGate.Text = "0"
+        Txt_OtherExpence.Text = "0"
+        Txt_TotExpence.Text = "0"
+        Txt_Balance.Text = "0"
+        Txt_LrNo.Text = "-"
+        Txt_RefNo.Text = "-"
+        Txt_Days.Text = 1
+        Txt_FuelLitres.Text = "0"
+
+        MaxNo()
+        MaxLedgerNo()
+        VehicleList()
+        PetrolBunkList()
+        DriverList()
+        CompanyList()
+        PlaceList()
+        GridDieselEntryList()
+    End Sub
+
+    Private Sub Timer1_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Timer1.Tick
+        LblTimeee.Text = Format(Now, "HH:MM:ss")
+    End Sub
+
+    Private Sub GoodsConsignment_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        Lbl_user.Text = Login.TxtUname.Text
+        Lbl_logtime.Text = Format(Now, "HH:mm:ss")
+        Lbl_logdate.Text = Date.Now.Day & "/" & Date.Now.Month & "/" & Date.Now.Year
+        LblDateee.Text = Date.Now.Day & "/" & Date.Now.Month & "/" & Date.Now.Year
+
+
+
+        Vehile_InsuranceList()
+        Ref()
+        Drp_VehicleNo.Focus()
+    End Sub
+
+    Private Sub Btn_LogOut_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Btn_LogOut.Click
+        Login.TxtUname.Text = ""
+        Login.TxtPass.Text = ""
+        Login.Show()
+        Me.Close()
+        Main.Hide()
+    End Sub
+
+    Private Sub Btn_Close_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Btn_Close.Click
+        Me.Close()
+    End Sub
+
+   
+
+
+
+    Private Sub Btn_Add_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Btn_Add.Click
+        Dim Ds As New DataSet
+        Dim Dt As New DataTable
+
+        Dim DtEntry, DtDiesel As String
+        Dim a(), b() As String
+        DtEntry = Dt_Entry.Text
+        a = DtEntry.Split("/")
+        DtEntry = a(1) & "/" & a(0) & "/" & a(2)
+
+        DtDiesel = Dt_DieselDate.Text
+        b = DtDiesel.Split("/")
+        DtDiesel = b(1) & "/" & b(0) & "/" & b(2)
+
+        If Drp_VehicleNo.Text = "" Or Drp_DriverName.Text = "" Or Drp_CompanyFrom.Text = "" Or Drp_PlaceBooking.Text = "" Or Drp_PlaceFrom.Text = "" Or Drp_PlaceTo.Text = "" Or Txt_LrNo.Text = "" Or Txt_RefNo.Text = "" Or Txt_Freight.Text = "" Or Txt_Advance.Text = "" Or Txt_Wage.Text = "" Or Txt_Diesel.Text = "" Or Txt_TotExpence.Text = "" Or Txt_Balance.Text = "" Then
+            MsgBox("Please Fill all the details", MsgBoxStyle.Critical)
+        Else
+            Try
+                con.Open()
+                Cmd = con.CreateCommand
+                Cmd.CommandText = "SELECT EntryNo FROM GoodsConsignment WHERE EntryNo=" & Val(LnkEntryNo.Text) & ""
+                Adp.SelectCommand = Cmd
+                Adp.Fill(Ds, "GoodsConsignment")
+                Dt = Ds.Tables("GoodsConsignment")
+                If (Dt.Rows.Count > 0) Then
+                    con.Close()
+                    MsgBox("EntryNo Already Exit !!", MsgBoxStyle.Critical)
+                Else
+                    Cmd2 = con.CreateCommand
+                    Cmd2.CommandText = "insert into GoodsConsignment(EntryNo,EntryDate,VehicleNo,DriverName,CompanyFrom,PlaceFrom,CompanyTo,PlaceTo,PlaceBooking,DieselDate,PetrolBunkId,PetrolLitres,LrNo,RefNo,Freight,Advance,Wage,Diesel,TolGate,Loading,UnLoading,OtherExp,Expence,Balance,NoDays) values('" & Trim(LnkEntryNo.Text) & "', '" & Trim(DtEntry) & "', '" & Trim(Drp_VehicleNo.Text) & "', '" & Trim(Drp_DriverName.Text) & "', '" & Trim(Drp_CompanyFrom.Text) & "', '" & Trim(Drp_PlaceFrom.Text) & "', '" & Trim(Drp_CompanyTo.Text) & "', '" & Trim(Drp_PlaceTo.Text) & "', '" & Trim(Drp_PlaceBooking.Text) & "', '" & Trim(DtDiesel) & "', '" & Trim(Drp_PetrolBunkId.Text) & "', '" & Trim(Txt_FuelLitres.Text) & "','" & Trim(Txt_LrNo.Text) & "','" & Trim(Txt_RefNo.Text) & "', " & Val(Txt_Freight.Text) & ",  " & Val(Txt_Advance.Text) & ", " & Val(Txt_Wage.Text) & ", " & Val(Txt_Diesel.Text) & ", " & Val(Txt_TolGate.Text) & ", " & Val(Txt_Loading.Text) & ", " & Val(Txt_UnLoading.Text) & ", " & Val(Txt_OtherExpence.Text) & ", " & Val(Txt_TotExpence.Text) & ", " & Val(Txt_Balance.Text) & ", '" & Trim(Txt_Days.Text) & "')"
+                    i = Cmd2.ExecuteReader.RecordsAffected()
+                    If i > 0 Then
+                        If Val(Txt_Advance.Text) > 0 Then
+                            Cmd3 = con.CreateCommand
+                            Cmd3.CommandText = "insert into Ledger(Ledgerno,datee,ledgername,ledgertype,narration,IncAmount,ExpAmount,obalance,Cheque) values(" & Val(Lbl_LedgerNo.Text) & ",'" & Trim(DtEntry) & "','Trip Expence','EXP','EntryNo-" & Trim(LnkEntryNo.Text) & "',0," & Val(Txt_Advance.Text) & ",0,'False')"
+                            Cmd3.ExecuteNonQuery()
+                        End If
+
+                        con.Close()
+                        MsgBox("New Goods Consignment Entry Succesfully Added !!", MsgBoxStyle.OkOnly, "Added !!")
+                        Ref()
+                        Drp_VehicleNo.Focus()
+                    Else
+                        con.Close()
+                        MsgBox(" New Goods Consignment Entry Fails to Add", MsgBoxStyle.OkOnly, "Fails to Add !!")
+                    End If
+                End If
+            Catch ex As Exception
+                con.Close()
+                MsgBox("Error: " & ex.Source & ": " & ex.Message, MsgBoxStyle.OkOnly, "Connection Error !!")
+            End Try
+        End If
+    End Sub
+
+
+
+    Private Sub Btn_Cancel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Btn_Cancel.Click
+        LnkEntryNo.Visible = True
+        Btn_Add.Visible = True
+        Btn_Close.Visible = True
+
+        Drp_EntryNo.Visible = False
+        Btn_Save.Visible = False
+        Btn_Delete.Visible = False
+        Btn_Cancel.Visible = False
+        Ref()
+    End Sub
+
+    Private Sub Btn_Save_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Btn_Save.Click
+        Dim Ds, Ds1 As New DataSet
+        Dim Dt, Dt1 As New DataTable
+
+        Dim DtEntry, DtDiesel As String
+        Dim a(), b() As String
+        DtEntry = Dt_Entry.Text
+        a = DtEntry.Split("/")
+        DtEntry = a(1) & "/" & a(0) & "/" & a(2)
+        DtDiesel = Dt_DieselDate.Text
+        b = DtDiesel.Split("/")
+        DtDiesel = b(1) & "/" & b(0) & "/" & b(2)
+
+        If Drp_EntryNo.Text = "" Or Drp_VehicleNo.Text = "" Or Drp_DriverName.Text = "" Or Drp_CompanyFrom.Text = "" Or Drp_PlaceBooking.Text = "" Or Drp_PlaceFrom.Text = "" Or Drp_PlaceTo.Text = "" Or Txt_LrNo.Text = "" Or Txt_RefNo.Text = "" Or Txt_Freight.Text = "" Or Txt_Advance.Text = "" Or Txt_Wage.Text = "" Or Txt_TotExpence.Text = "" Or Txt_Balance.Text = "" Then
+
+            MsgBox("Please Fill all the details", MsgBoxStyle.Critical)
+        Else
+            Try
+                con.Open()
+                Cmd = con.CreateCommand
+                Cmd.CommandText = "SELECT EntryNo FROM GoodsConsignment WHERE EntryNo=" & Val(Drp_EntryNo.Text) & ""
+                Adp.SelectCommand = Cmd
+                Adp.Fill(Ds, "GoodsConsignment")
+                Dt = Ds.Tables("GoodsConsignment")
+                If (Dt.Rows.Count > 0) Then
+                    Cmd2 = con.CreateCommand
+                    Cmd2.CommandText = "Update GoodsConsignment set EntryDate='" & Trim(DtEntry) & "', VehicleNo='" & Trim(Drp_VehicleNo.Text) & "', DriverName='" & Trim(Drp_DriverName.Text) & "', CompanyFrom='" & Trim(Drp_CompanyFrom.Text) & "',  PlaceFrom='" & Trim(Drp_PlaceFrom.Text) & "', CompanyTo='" & Trim(Drp_CompanyTo.Text) & "', PlaceTo='" & Trim(Drp_PlaceTo.Text) & "', PlaceBooking='" & Trim(Drp_PlaceBooking.Text) & "', DieselDate='" & Trim(DtDiesel) & "', PetrolBunkId='" & Trim(Drp_PetrolBunkId.Text) & "', PetrolLitres=" & Val(Txt_FuelLitres.Text) & ", LrNo='" & Trim(Txt_LrNo.Text) & "', RefNo='" & Trim(Txt_RefNo.Text) & "', Freight=" & Val(Txt_Freight.Text) & ", Advance=" & Val(Txt_Advance.Text) & ", Wage=" & Val(Txt_Wage.Text) & ", Diesel=" & Val(Txt_Diesel.Text) & ", TolGate=" & Val(Txt_TolGate.Text) & ", Loading=" & Val(Txt_Loading.Text) & ", UnLoading=" & Val(Txt_UnLoading.Text) & ", OtherExp=" & Val(Txt_OtherExpence.Text) & ", Expence=" & Val(Txt_TotExpence.Text) & ", Balance=" & Val(Txt_Balance.Text) & ", NoDays=" & Val(Txt_Days.Text) & " where EntryNo=" & Val(Drp_EntryNo.Text) & ""
+                    i = Cmd2.ExecuteReader.RecordsAffected()
+                    If i > 0 Then
+
+                        If Val(Txt_Advance.Text) > 0 Then
+                            Cmd3 = con.CreateCommand
+                            Cmd3.CommandText = "SELECT LedgerNo FROM Ledger where Narration='EntryNo-" & Trim(Drp_EntryNo.Text) & "'"
+                            Adp1.SelectCommand = Cmd3
+                            Adp1.Fill(Ds1, "Ledger")
+                            Dt1 = Ds1.Tables("Ledger")
+                            If (Dt1.Rows.Count > 0) Then
+                                Cmd4 = con.CreateCommand
+                                Cmd4.CommandText = "update Ledger set datee='" & Trim(DtEntry) & "', ExpAmount=" & Val(Txt_Advance.Text) & " where Narration='EntryNo-" & Trim(Drp_EntryNo.Text) & "'"
+                                Cmd4.ExecuteNonQuery()
+                            Else
+                                Cmd4 = con.CreateCommand
+                                Cmd4.CommandText = "insert into Ledger(Ledgerno,datee,ledgername,ledgertype,narration,IncAmount,ExpAmount,obalance,Cheque) values(" & Val(Lbl_LedgerNo.Text) & ",'" & Trim(DtEntry) & "','Trip Expence','EXP','EntryNo-" & Trim(Drp_EntryNo.Text) & "',0," & Val(Txt_Advance.Text) & ",0,'False')"
+                                Cmd4.ExecuteNonQuery()
+                            End If
+                        End If
+                       
+                        con.Close()
+                        MsgBox("Goods Consignment Entry Succesfully Saved !!", MsgBoxStyle.OkOnly, "Saved !!")
+                        Ref()
+                        Drp_EntryNo.Focus()
+                    Else
+                        con.Close()
+                        MsgBox("Goods Consignment Entry Fails to Save", MsgBoxStyle.OkOnly, "Fails to Save !!")
+                    End If
+                Else
+                    con.Close()
+                    MsgBox("Invalid EntryNo !!", MsgBoxStyle.Critical)
+                End If
+            Catch ex As Exception
+                con.Close()
+                MsgBox("Error: " & ex.Source & ": " & ex.Message, MsgBoxStyle.OkOnly, "Connection Error !!")
+            End Try
+        End If
+    End Sub
+
+    Private Sub Btn_Delete_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Btn_Delete.Click
+        Dim Ds As New DataSet
+        Dim Dt As New DataTable
+
+        Dim DtEntry As String
+        Dim a() As String
+        DtEntry = Dt_Entry.Text
+        a = DtEntry.Split("/")
+        DtEntry = a(1) & "/" & a(0) & "/" & a(2)
+
+        If Drp_EntryNo.Text = "" Then
+            MsgBox("Please Fill all the details", MsgBoxStyle.Critical)
+        Else
+            Try
+                con.Open()
+                Cmd = con.CreateCommand
+                Cmd.CommandText = "SELECT EntryNo FROM GoodsConsignment WHERE EntryNo=" & Val(Drp_EntryNo.Text) & ""
+                Adp.SelectCommand = Cmd
+                Adp.Fill(Ds, "GoodsConsignment")
+                Dt = Ds.Tables("GoodsConsignment")
+                If (Dt.Rows.Count > 0) Then
+                    Cmd2 = con.CreateCommand
+                    Cmd2.CommandText = "delete from GoodsConsignment where EntryNo=" & Val(Drp_EntryNo.Text) & ""
+                    i = Cmd2.ExecuteReader.RecordsAffected()
+                    If i > 0 Then
+                        Cmd3 = con.CreateCommand
+                        Cmd3.CommandText = "delete from Ledger where Narration='EntryNo-" & Trim(Drp_EntryNo.Text) & "'"
+                        Cmd3.ExecuteNonQuery()
+                        con.Close()
+                        MsgBox("Goods Consignment Entry Succesfully Deleted !!", MsgBoxStyle.OkOnly, "Deleted !!")
+                        Ref()
+                    Else
+                        con.Close()
+                        MsgBox("Goods Consignment Entry Fails to Delete", MsgBoxStyle.OkOnly, "Fails to Delete !!")
+                    End If
+                Else
+                    con.Close()
+                    MsgBox("Invalid EntryNo !!", MsgBoxStyle.Critical)
+                End If
+            Catch ex As Exception
+                con.Close()
+                MsgBox("Error: " & ex.Source & ": " & ex.Message, MsgBoxStyle.OkOnly, "Connection Error !!")
+            End Try
+        End If
+    End Sub
+
+
+
+    Private Sub LnkEntryNo_LinkClicked(ByVal sender As System.Object, ByVal e As System.Windows.Forms.LinkLabelLinkClickedEventArgs) Handles LnkEntryNo.LinkClicked
+
+        EntryNoList()
+        LnkEntryNo.Visible = False
+        Btn_Add.Visible = False
+        Btn_Close.Visible = False
+
+        Drp_EntryNo.Visible = True
+        Btn_Save.Visible = True
+        Btn_Delete.Visible = True
+        Btn_Cancel.Visible = True
+
+    End Sub
+
+    Private Sub Drp_EntryNo_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Drp_EntryNo.SelectedIndexChanged
+        Dim Ds As New DataSet
+        Dim Dt As New DataTable
+
+        Dim EntryDate, VehicleNo, DriverName, CompanyFrom, CompanyTo, PlaceBooking, PlaceFrom, PlaceTo As String
+
+        con.Open()
+        Cmd = con.CreateCommand
+        Cmd.CommandText = "select EntryDate,VehicleNo,DriverName,CompanyFrom,PlaceFrom,CompanyTo,PlaceTo,PlaceBooking,LrNo,RefNo,Freight,Advance,Wage,Diesel,TolGate,Loading,UnLoading,OtherExp,Expence,Balance from GoodsConsignment where EntryNo=" & Val(Drp_EntryNo.Text) & ""
+        Adp.SelectCommand = Cmd
+        Adp.Fill(Ds)
+        Dt = Ds.Tables("GoodsConsignment")
+        If (Ds.Tables(0).Rows.Count > 0) Then
+            EntryDate = Ds.Tables(0).Rows(0)("EntryDate")
+            VehicleNo = Ds.Tables(0).Rows(0)("VehicleNo")
+
+            DriverName = Ds.Tables(0).Rows(0)("DriverName")
+            CompanyFrom = Ds.Tables(0).Rows(0)("CompanyFrom")
+            PlaceFrom = Ds.Tables(0).Rows(0)("PlaceFrom")
+            CompanyTo = Ds.Tables(0).Rows(0)("CompanyTo")
+            PlaceTo = Ds.Tables(0).Rows(0)("PlaceTo")
+            PlaceBooking = Ds.Tables(0).Rows(0)("PlaceBooking")
+
+
+            Txt_Freight.Text = Val(Ds.Tables(0).Rows(0)("Freight"))
+            Txt_Advance.Text = Val(Ds.Tables(0).Rows(0)("Advance"))
+            Txt_Wage.Text = Val(Ds.Tables(0).Rows(0)("Wage"))
+            Txt_Diesel.Text = Val(Ds.Tables(0).Rows(0)("Diesel"))
+            Txt_Loading.Text = Val(Ds.Tables(0).Rows(0)("Loading"))
+            Txt_UnLoading.Text = Val(Ds.Tables(0).Rows(0)("UnLoading"))
+            Txt_TolGate.Text = Val(Ds.Tables(0).Rows(0)("TolGate"))
+            Txt_OtherExpence.Text = Val(Ds.Tables(0).Rows(0)("OtherExp"))
+
+
+            Txt_TotExpence.Text = Val(Ds.Tables(0).Rows(0)("Expence"))
+            Txt_Balance.Text = Val(Ds.Tables(0).Rows(0)("Balance"))
+
+            Txt_LrNo.Text = Ds.Tables(0).Rows(0)("LrNo")
+            Txt_RefNo.Text = Ds.Tables(0).Rows(0)("RefNo")
+
+            con.Close()
+            Dt_Entry.Text = EntryDate
+            Drp_VehicleNo.Text = VehicleNo
+            Drp_DriverName.Text = DriverName
+            Drp_CompanyFrom.Text = CompanyFrom
+            Drp_PlaceFrom.Text = PlaceFrom
+            Drp_CompanyTo.Text = CompanyTo
+            Drp_PlaceTo.Text = PlaceTo
+            Drp_PlaceBooking.Text = PlaceBooking
+
+        Else
+            con.Close()
+            MsgBox("Check the Details", MsgBoxStyle.Critical, "Search !!")
+        End If
+    End Sub
+
+   
+    Private Sub Dt_Entry_ValueChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Dt_Entry.ValueChanged
+        GridDieselEntryList()
+    End Sub
+
+    Private Sub Txt_Wage_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles Txt_Wage.KeyPress
+        e.Handled = TrapKeyaa(Asc(e.KeyChar))
+    End Sub
+
+    Private Sub Txt_Wage_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Txt_Wage.TextChanged
+        TotalCalculation()
+    End Sub
+
+    Private Sub Txt_Advance_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles Txt_Advance.KeyPress
+        e.Handled = TrapKeyaa(Asc(e.KeyChar))
+    End Sub
+
+    Private Sub Txt_Advance_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Txt_Advance.TextChanged
+        TotalCalculation()
+    End Sub
+
+    Private Sub Txt_TolGate_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles Txt_TolGate.KeyPress
+        e.Handled = TrapKey(Asc(e.KeyChar))
+    End Sub
+
+
+    Private Sub Txt_TolGate_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Txt_TolGate.TextChanged
+        TotalCalculation()
+    End Sub
+
+    Private Sub Txt_Loading_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles Txt_Loading.KeyPress
+        e.Handled = TrapKey(Asc(e.KeyChar))
+    End Sub
+
+    Private Sub Txt_Loading_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Txt_Loading.TextChanged
+        TotalCalculation()
+    End Sub
+
+    Private Sub Txt_UnLoading_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles Txt_UnLoading.KeyPress
+        e.Handled = TrapKey(Asc(e.KeyChar))
+    End Sub
+
+    Private Sub Txt_UnLoading_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Txt_UnLoading.TextChanged
+        TotalCalculation()
+    End Sub
+
+    Private Sub Txt_OtherExpence_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles Txt_OtherExpence.KeyPress
+        e.Handled = TrapKey(Asc(e.KeyChar))
+    End Sub
+
+    Private Sub Txt_OtherExpence_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Txt_OtherExpence.TextChanged
+        TotalCalculation()
+    End Sub
+
+
+    Private Sub Txt_Freight_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles Txt_Freight.KeyPress
+        e.Handled = TrapKeyaa(Asc(e.KeyChar))
+    End Sub
+
+    Private Sub Txt_Diesel_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles Txt_Diesel.KeyPress
+        e.Handled = TrapKeyaa(Asc(e.KeyChar))
+    End Sub
+
+    Private Sub Txt_LrNo_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles Txt_LrNo.KeyPress
+        e.Handled = TrapKeya(Asc(e.KeyChar))
+    End Sub
+
+    Private Sub Txt_RefNo_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles Txt_RefNo.KeyPress
+        e.Handled = TrapKeya(Asc(e.KeyChar))
+    End Sub
+
+    Private Sub Txt_FuelLitres_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles Txt_FuelLitres.KeyPress
+        e.Handled = TrapKeyaa(Asc(e.KeyChar))
+    End Sub
+
+    Private Sub Txt_FuelLitres_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Txt_FuelLitres.TextChanged
+        Txt_Diesel.Text = Val(Txt_FuelLitres.Text) * My.Settings.Diesel
+    End Sub
+End Class
